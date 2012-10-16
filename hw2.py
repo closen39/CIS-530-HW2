@@ -10,13 +10,13 @@ from nltk.tokenize import word_tokenize
 # returns either the word itself in lowercase or 'num' if number
 # Returns numerical delimiter punctuation as a word if appears alone (ie. punctuation)
 # Checks all chars of the word to be number, comma, or period
-#   If any other char appears, return word
+#   If any other char appears, return word in lower case
 #   Else return num
 def word_transform(word):
     if word == ',' or word == '.':
         return word
     for char in word:
-        if not char.isdigit() and not char == ',' and not char == '.'
+        if not char.isdigit() and not char == ',' and not char == '.':
             return word.lower()
     return 'num'
 
