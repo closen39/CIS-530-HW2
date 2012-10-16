@@ -13,7 +13,7 @@ def word_transform(word):
     if word == ',' or word == '.':
         return word
     for char in word:
-        if not char.isdigit() and not char == ',' and not char == '.'
+        if not char.isdigit() and not char == ',' and not char == '.':
             return word.lower()
     return 'num'
 
