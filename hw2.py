@@ -8,12 +8,17 @@ from nltk.tokenize import word_tokenize
 
 
 # returns either the word itself in lowercase or 'num' if number
-# TODO: make this less kludgy??
+# Returns numerical delimiter punctuation as a word if appears alone (ie. punctuation)
+# Checks all chars of the word to be number, comma, or period
+#   If any other char appears, return word
+#   Else return num
 def word_transform(word):
+    if word == ',' or word == '.':
+        return word
     for char in word:
-        if char.isdigit():
-            return 'num'
-    return word.lower()
+        if not char.isdigit() and not char == ',' and not char == '.'
+            return word.lower()
+    return 'num'
 
 def sent_transform(sent_string):
     tokens = word_tokenize(sent_string)
@@ -29,8 +34,8 @@ def main():
     print "\n\n# 1.1\n>>> word_tranform('General')"
     print word_transform('General')
 
-    print "\n\n# 1.2\n>>> sent_tranform('Mr. Louis’s company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.')"
-    print sent_transform("Mr. Louis’s company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.")
+    print "\n\n# 1.2\n>>> sent_tranform('Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.')"
+    print sent_transform("Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.")
 
 if  __name__ =='__main__':
     main()
