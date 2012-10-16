@@ -10,10 +10,10 @@ from nltk.tokenize import word_tokenize
 # returns either the word itself in lowercase or 'num' if number
 # TODO: make this less kludgy??
 def word_transform(word):
-    if word.isdigit() or ',' in word or '.' in word:
-        return 'num'
-    else:
-        return word.lower()
+    for char in word:
+        if char.isdigit():
+            return 'num'
+    return word.lower()
 
 def sent_transform(sent_string):
     tokens = word_tokenize(sent_string)
