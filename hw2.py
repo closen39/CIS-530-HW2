@@ -4,8 +4,6 @@
 
 # Import the corpus reader
 from nltk.tokenize import word_tokenize
-from python.math import log
-
 
 
 # returns either the word itself in lowercase or 'num' if number
