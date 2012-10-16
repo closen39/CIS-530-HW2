@@ -4,6 +4,7 @@
 
 # Import the corpus reader
 from nltk.tokenize import word_tokenize
+from python.math import log
 
 
 
@@ -27,6 +28,7 @@ def sent_transform(sent_string):
         ret.append(word_transform(token))
     return ret
 
+# creates ngram tuples of (context, word)
 def make_ngram_tuples(samples, n):
     ret = list()
     for idx, word in enumerate(samples):
@@ -38,6 +40,14 @@ def make_ngram_tuples(samples, n):
             context = None
         ret.append(tuple([context, word]))
     return ret
+
+class NGramModel:
+    def __init__(training_data, n):
+        self.model = make_ngram_tuples(sent_transform(training_data), n)
+        return self.model
+
+    def logprob(context, event):
+        pass
 
 # main method
 def main():
