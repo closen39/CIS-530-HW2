@@ -40,7 +40,7 @@ def make_ngram_tuples(samples, n):
     return ret
 
 class NGramModel:
-    def __init__(training_data, n):
+    def __init__(self, training_data, n):
         self.model = make_ngram_tuples(sent_transform(training_data), n)
         return self.model
 
