@@ -29,10 +29,15 @@ def sent_transform(sent_string):
 
 def make_ngram_tuples(samples, n):
     ret = list()
-    for word in samples:
-        context = tuple(samples[word.index-n-1:word.index])
-        ret.append(tuple(context, word))
-    return tuple(ret)
+    for idx, word in enumerate(samples):
+        if idx < n-1:
+            continue
+        if n != 1:
+            context = tuple(samples[idx-n+1:idx])
+        else:
+            context = None
+        ret.append(tuple([context, word]))
+    return ret
 
 # main method
 def main():
@@ -45,9 +50,16 @@ def main():
     print sent_transform("Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.")
 
     samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'sand']
-    make_ngram_tuples(samples, 1)
-    make_ngram_tuples(samples, 2)
-    make_ngram_tuples(samples, 3)
+    print "\n\n#1.3\n>>>make_ngram_tuples"
+    print "Samples = "
+    print samples
+    print "\n"
+    print make_ngram_tuples(samples, 1)
+    print "\n"
+    print make_ngram_tuples(samples, 2)
+    print "\n"
+    print make_ngram_tuples(samples, 3)
+    print "\n"
 
 
 if  __name__ =='__main__':
