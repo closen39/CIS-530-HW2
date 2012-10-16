@@ -27,6 +27,13 @@ def sent_transform(sent_string):
         ret.append(word_transform(token))
     return ret
 
+def make_ngram_tuples(samples, n):
+    ret = list()
+    for word in samples:
+        context = tuple(samples[word.index-n-1])
+        ret.append(tuple(context, word))
+    return tuple(ret)
+
 # main method
 def main():
     print "# 1.1\n>>> word_tranform('34,213.397')"
