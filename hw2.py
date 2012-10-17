@@ -218,7 +218,7 @@ def get_cluto_matrix(file_names):
 
     # Flatten top words into single deduped list
     flattened = [item for sublist in top_words.values() for item in sublist]
-    flattened = set(flattened)
+    flattened = list(set(flattened))
     fs = create_feature_space(flattened)
 
     # Vectorize all documents
@@ -235,6 +235,18 @@ def get_cluto_matrix(file_names):
             scores.append(cosine_similarity(doc_vectors[fname], doc_vectors[fname2]))
         matrix.append(scores)
     return matrix
+
+def write_cluto_matrix_file(matrix):
+    width = len(matrix[0])
+    height = len(matrix)
+    
+    flattened = [item for sublist in matrix for item in sublist]
+    nonzeroes = [item for item in flattened if item != 0]
+    print nonzeroes
+
+    out = open('graph_file', 'w')
+    out.write(height + " " + width + " ")
+
 
 def print_sentences_from_files(file_names, outfilename):
     # list of all sentences
@@ -296,7 +308,8 @@ def main():
 
     print get_all_bestfits('/home1/c/cis530/hw2/data/wordfit/')
 
-    get_cluto_matrix(file_names)
+    matrix = get_cluto_matrix(file_names)
+    write_cluto_matrix_file(matrix)
 
 if  __name__ =='__main__':
     main()
