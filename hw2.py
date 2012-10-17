@@ -41,10 +41,9 @@ def make_ngram_tuples(samples, n):
 
 class NGramModel:
     def __init__(self, training_data, n):
-        self.model = make_ngram_tuples(sent_transform(training_data), n)
-        return self.model
-
-    def logprob(context, event):
+        self.model = make_ngram_tuples(training_data, n)
+        
+    def logprob(self, context, event):
         pass
 
 # main method
@@ -67,7 +66,10 @@ def main():
     print make_ngram_tuples(samples, 2)
     print "\n"
     print make_ngram_tuples(samples, 3)
-    print "\n"
+    print "\n\n"
+
+    model = NGramModel(samples, 2)
+    print model.model
 
 
 if  __name__ =='__main__':
