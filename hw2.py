@@ -238,6 +238,14 @@ def get_cluto_matrix(file_names):
     return matrix
 
 def write_cluto_matrix_file(matrix):
+    files = list()
+    corpus = '/home1/c/cis530/hw2/data/corpus'
+    files.extend([corpus + "/" + x for x in get_all_files(corpus)])
+    test = '/home1/c/cis530/hw2/data/test'
+    files.extend([test + "/" + x for x in get_all_files(test)])
+    
+    matrix = get_cluto_matrix(files)
+    
     width = len(matrix[0])
     height = len(matrix)
     nonzeroes = [item for sublist in matrix for item in sublist if item != 0]
