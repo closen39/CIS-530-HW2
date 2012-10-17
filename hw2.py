@@ -184,9 +184,12 @@ def get_fit_for_word(sent, word, model):
     return lp1 + lp2
 
 def get_all_bestfits(path):
+    # Train language model with entire corpus
     corpus = '/home1/c/cis530/hw2/data/corpus'
     data = [corpus + "/" + f for f in get_all_files(corpus)]
     model = build_bigram_from_files(data)
+    
+    # Get all best fit files
     files = get_all_files(path)
     ret = list()
     for f in files:
@@ -228,22 +231,10 @@ def get_cluto_matrix(file_names):
     for id1, fname in enumerate(file_names):
         scores = list()
         for id2, fname2 in enumerate(file_names):
-            print 'vector 1 : ' + str(doc_vectors[fname])
-            print 'vector 2 : ' + str(doc_vectors[fname2])
             print doc_vectors[fname] is doc_vectors[fname2]
             scores.append(cosine_similarity(doc_vectors[fname], doc_vectors[fname2]))
         matrix.append(scores)
-
-    print matrix
-    # for k, v in top_words.iteritems():
-    #     print "Company: " + str(k)
-    #     print "\nWords: " + str(v[:5])
-
-    # Get doc similarity for each file
-    pass
-
-
-
+    return matrix
 
 def print_sentences_from_files(file_names, outfilename):
     # list of all sentences
