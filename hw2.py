@@ -244,8 +244,13 @@ def write_cluto_matrix_file(matrix):
 
     out = open('graph_file', 'w')
     out.write(str(height) + " " + str(width) + " " + str(len(nonzeroes)) + "\n")
-    out.flush()
 
+    for cos_vec in matrix:
+        # behavior in case of no cosine similarity is underspecified
+        # We will append an empty newline to the cluto graph file for this case
+        for idx,score in enumerate(cos_vec):
+            if score != 0:
+                out.write(str(idx+1) + " " + str(score))
 
 
 
