@@ -152,13 +152,11 @@ def build_bigram_from_files(file_names):
         f = open(file1)
         for line in f:
             docs.append(line.rstrip())
-
-    print 'docs is ' + str(docs)
+            
     # sentence tokenize all first lines
     samples = list()
     for doc in docs:
         samples.extend(sent_transform(doc))
-    print 'samples is ' + str(samples)
     # make model
     model = NGramModel(samples, 2)
     return model
