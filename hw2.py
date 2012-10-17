@@ -251,6 +251,7 @@ def write_cluto_matrix_file(matrix):
         for idx,score in enumerate(cos_vec):
             if score != 0:
                 out.write(str(idx+1) + " " + str(score))
+        out.write("\n")
 
 
 
