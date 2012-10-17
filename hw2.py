@@ -1,11 +1,9 @@
-# coding: utf-8
 # Nate Close: closen@seas.upenn.edu
 # Jason Mow: jmow@seas.upenn.edu
 
 # Import the corpus reader
 from nltk.tokenize import word_tokenize
 from math import log
-
 
 # returns either the word itself in lowercase or 'num' if number
 # Returns numerical delimiter punctuation as a word if appears alone (ie. punctuation)
@@ -64,12 +62,12 @@ class NGramModel:
 
 # main method
 def main():
-    print "# 1.1\n>>> word_tranform('34,213.397')"
+    print "# 1.1.1\n>>> word_tranform('34,213.397')"
     print word_transform('34,213.397')
-    print "\n\n# 1.1\n>>> word_tranform('General')"
+    print "\n\n# 1.1.1\n>>> word_tranform('General')"
     print word_transform('General')
 
-    print "\n\n# 1.2\n>>> sent_tranform('Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.')"
+    print "\n\n# 1.1.2\n>>> sent_tranform('Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.')"
     print sent_transform("Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.")
 
     samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'sand']
