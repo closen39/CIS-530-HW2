@@ -262,7 +262,7 @@ def print_sentences_from_files(file_names, outfilename):
 
     # open file for writing
     outfile = open(outfilename, "w")
-    f.write(fsents)
+    outfile.write(fsents)
 
 
 # main method
