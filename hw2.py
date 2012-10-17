@@ -7,6 +7,7 @@ from nltk.tokenize import word_tokenize
 from nltk.tokenize import sent_tokenize
 from nltk.probability import FreqDist
 from math import log, sqrt
+from subprocess import Popen, PIPE
 
 # gets all files in this directory and its sub-directories
 def get_all_files(directory):
@@ -270,6 +271,11 @@ def print_sentences_from_files(file_names, outfilename):
     outfile = open(outfilename, "w")
     for elt in fsents:
         outfile.write(str(elt))
+
+def gen_lm_from_file(input1, output1):
+    # call ngram_count - output is written to file
+    pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram', '-text', input1, '-lm', output1], stdout=PIPE)
+
 
 
 # main method
