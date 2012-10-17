@@ -4,8 +4,9 @@
 # Import the corpus reader
 from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
+from nltk.tokenize import sent_tokenize
 from nltk.probability import FreqDist
-from math import log
+from math import log, sqrt
 
 # gets all files in this directory and its sub-directories
 def get_all_files(directory):
@@ -20,6 +21,13 @@ def get_sub_directories(directory):
             if (f[:f.index("/")] not in dirs):
                 dirs.append(f[:f.index("/")])
     return dirs
+
+  # returns a list of all sentences in that file
+def load_file_sentences(filepath):
+    file1 = open(filepath)
+    sent = file1.read()
+    sent = sent.lower()
+    return sent_tokenize(sent)  
 
 # returns a list of all tokens in a file
 def load_file_tokens(filepath):
@@ -153,12 +161,10 @@ def build_bigram_from_files(file_names):
         for line in f:
             docs.append(line.rstrip())
 
-    print 'docs is ' + str(docs)
     # sentence tokenize all first lines
     samples = list()
     for doc in docs:
         samples.extend(sent_transform(doc))
-    print 'samples is ' + str(samples)
     # make model
     model = NGramModel(samples, 2)
     return model
@@ -178,8 +184,10 @@ def get_fit_for_word(sent, word, model):
     return lp1 + lp2
 
 def get_all_bestfits(path):
+    corpus = '/home1/c/cis530/hw2/data/corpus'
+    data = [corpus + "/" + f for f in get_all_files(corpus)]
+    model = build_bigram_from_files(data)
     files = get_all_files(path)
-    model = build_bigram_from_files([path + "/" + f for f in files])
     ret = list()
     for f in files:
         probs = dict()
@@ -216,13 +224,42 @@ def get_cluto_matrix(file_names):
         f = open(fname)
         doc_vectors[fname] = vectorize(fs, f.read())
 
+    matrix = []
+    for id1, fname in enumerate(file_names):
+        scores = list()
+        for id2, fname2 in enumerate(file_names):
+            scores.append(cosine_similarity(doc_vectors[fname], doc_vectors[fname2]))
+        matrix.append(scores)
 
+    print matrix
     # for k, v in top_words.iteritems():
     #     print "Company: " + str(k)
     #     print "\nWords: " + str(v[:5])
 
     # Get doc similarity for each file
     pass
+
+
+
+
+def print_sentences_from_files(file_names, outfilename):
+    # list of all sentences
+    sents = list()
+    # get sentence transform of all files
+    for f in file_names:
+        sents.extend(load_file_sentences(f))
+
+    #list of formatted sents
+    fsents = list()
+    for sent in sents:
+        string = ''
+        for word in sent_transform(sent):
+            string.append(word + ' ')
+        fsents.append(string + '\n')
+
+    # open file for writing
+    outfile = open(outfilename, "w")
+    f.write(fsents)
 
 
 # main method
@@ -261,6 +298,8 @@ def main():
     print '\n\nbigram built - logprob of her name is ' + str(lm.logprob(('her',), 'name'))
 
     print '\n\nget_fit_for_word is ' + str(get_fit_for_word('her -blank- is rio and she dances on the sand', 'name', lm))
+
+    print get_all_bestfits('/home1/c/cis530/hw2/data/wordfit/')
 
     get_cluto_matrix(file_names)
 
