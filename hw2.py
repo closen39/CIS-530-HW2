@@ -41,10 +41,19 @@ def make_ngram_tuples(samples, n):
 
 class NGramModel:
     def __init__(self, training_data, n):
+        self.words = training_data
         self.model = make_ngram_tuples(training_data, n)
         
     def logprob(self, context, event):
         pass
+
+    def count_word(self, event):
+        events = [word for (context, word) in self.model if word is event]
+        return len(events)
+
+    def count_ngram(self, context, event):
+        ngrams = [(con, word) for (con, word) in self.model if (context, event) == (con, word)]
+        return len(ngrams)
 
 # main method
 def main():
@@ -56,7 +65,7 @@ def main():
     print "\n\n# 1.2\n>>> sent_tranform('Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.')"
     print sent_transform("Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.")
 
-    samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'sand']
+    samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'her', 'name', 'is', 'jane', 'sand']
     print "\n\n#1.3\n>>>make_ngram_tuples"
     print "Samples = "
     print samples
@@ -70,6 +79,10 @@ def main():
 
     model = NGramModel(samples, 2)
     print model.model
+    print '\ncount of her is ' + str(model.count_word('name'))
+
+    print '\n\ncount of "her name" is ' + str(model.count_ngram(('her',), 'name'))
+    print '\n\ncount of "is rio" is ' + str(model.count_ngram(('is',), 'rio'))
 
 
 if  __name__ =='__main__':
