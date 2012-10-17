@@ -203,7 +203,6 @@ def get_cluto_matrix(file_names):
     for fname in file_names:
         f = open(fname)
         doc_vectors[fname] = vectorize(fs, f.read())
-        print doc_vectors[fname]
 
 
     # for k, v in top_words.iteritems():
