@@ -104,7 +104,7 @@ def get_fit_for_word(sent, word, model):
 
 def get_all_bestfits(path):
     files = get_all_files(path)
-    model = build_bigram_from_files(files)
+    model = build_bigram_from_files([path + "/" + f for f in files])
     ret = list()
     for f in files:
         probs = dict()
