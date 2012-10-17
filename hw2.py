@@ -257,7 +257,7 @@ def print_sentences_from_files(file_names, outfilename):
     for sent in sents:
         string = ''
         for word in sent_transform(sent):
-            string.append(word + ' ')
+            string += word + ' '
         fsents.append(string + '\n')
 
     # open file for writing
