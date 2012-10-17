@@ -44,21 +44,52 @@ class NGramModel:
         self.model = make_ngram_tuples(training_data, n)
         self.vocab = list(set(self.words))
 
+    # Probability determined by (count of ngram + 1) / (count of event + size of vocab)
+    # Size of vocab is the number of unique tokens in the corpus
     def logprob(self, context, event):
         count = self.count_ngram(context, event)
         word_count = self.count_word(event)
         prob = (count + 1) / float((word_count + len(self.vocab)))
-        print "prob is " + str(prob)
-        print "log prob is " + str(log(prob))
         return -1 * log(prob)
 
+    # Counts occurences of a word in the corpus
     def count_word(self, event):
         events = [word for (context, word) in self.model if word is event]
         return len(events)
 
+    # Couts occurences of a context and word in the corpus
     def count_ngram(self, context, event):
         ngrams = [(con, word) for (con, word) in self.model if (context, event) == (con, word)]
         return len(ngrams)
+
+# trains a bigram language model
+# seems approximately correct
+# TODO: Debug why probability is slightly off for sample data
+def build_bigram_from_files(file_names):
+    docs = list()
+    for file1 in file_names:
+        f = open(file1)
+        for line in f:
+            docs.append(line.rstrip())
+
+    print 'docs is ' + str(docs)
+    # sentence tokenize all first lines
+    samples = list()
+    for doc in docs:
+        samples.extend(sent_transform(doc))
+    print 'samples is ' + str(samples)
+    # make model
+    model = NGramModel(samples, 2)
+    return model
+
+def get_fit_for_word(sent, word, model):
+    words = sent_transform(sent)
+    context = str()
+    for idx, wrd in enumerate(words):
+        if wrd == '-blank-':
+            context = words[idx-1]
+            break
+    return model.logprob((context,), word)
 
 # main method
 def main():
@@ -91,5 +122,10 @@ def main():
 
     print '\n\nlogprob(("her",), name) is ' + str(model.logprob(('her',), 'name'))
 
+    file_names = ['file.txt']
+    lm = build_bigram_from_files(file_names)
+    print '\n\nbigram built - logprob of her name is ' + str(lm.logprob(('her',), 'name'))
+
+    print '\n\nget_fit_for_word is ' + str(get_fit_for_word('her -blank- is rio and she dances on the sand', 'name', lm))
 if  __name__ =='__main__':
     main()
