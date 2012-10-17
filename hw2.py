@@ -240,14 +240,11 @@ def get_cluto_matrix(file_names):
 def write_cluto_matrix_file(matrix):
     width = len(matrix[0])
     height = len(matrix)
-    
-    flattened = [item for sublist in matrix for item in sublist]
     nonzeroes = [item for sublist in matrix for item in sublist if item != 0]
-    print nonzeroes
 
     out = open('graph_file', 'w')
     out.write(str(height) + " " + str(width) + " " + str(len(nonzeroes)) + "\n")
-
+    out.flush()
 
 
 
