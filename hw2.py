@@ -2,8 +2,14 @@
 # Jason Mow: jmow@seas.upenn.edu
 
 # Import the corpus reader
+from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
 from math import log
+
+# gets all files in this directory and its sub-directories
+def get_all_files(directory):
+    files = PlaintextCorpusReader(directory, '.*')
+    return files.fileids() 
 
 # returns either the word itself in lowercase or 'num' if number
 # Returns numerical delimiter punctuation as a word if appears alone (ie. punctuation)
@@ -50,7 +56,7 @@ class NGramModel:
         count = self.count_ngram(context, event)
         word_count = self.count_word(event)
         prob = (count + 1) / float((word_count + len(self.vocab)))
-        return -1 * log(prob)
+        return log(prob)
 
     # Counts occurences of a word in the corpus
     def count_word(self, event):
@@ -85,11 +91,36 @@ def build_bigram_from_files(file_names):
 def get_fit_for_word(sent, word, model):
     words = sent_transform(sent)
     context = str()
+    follower = str()
     for idx, wrd in enumerate(words):
         if wrd == '-blank-':
             context = words[idx-1]
-            break
-    return model.logprob((context,), word)
+        if words[idx-1] == '-blank-':
+            follower = wrd
+    lp1 = model.logprob((context,), word)
+    lp2 = model.logprob((word,), follower)
+    print lp1, lp2
+    return lp1 + lp2
+
+def get_all_bestfits(path):
+    files = get_all_files(path)
+    model = build_bigram_from_files(files)
+    ret = list()
+    for f in files:
+        probs = dict()
+        sent = f.readline().rstrip()
+        w1 = f.readline().rstrip()
+        w2 = f.readline().rstrip()
+        w3 = f.readline().rstrip()
+        w4 = f.readline().rstrip()
+        probs[w1] = get_fit_for_word(sent, w1, model)
+        probs[w2] = get_fit_for_word(sent, w2, model)
+        probs[w3] = get_fit_for_word(sent, w3, model)
+        probs[w4] = get_fit_for_word(sent, w4, model)
+        best = [k for k,v in probs.iteritems() if v is max(probs.values())]
+        ret.extend(best)
+    return ret
+
 
 # main method
 def main():
@@ -127,5 +158,6 @@ def main():
     print '\n\nbigram built - logprob of her name is ' + str(lm.logprob(('her',), 'name'))
 
     print '\n\nget_fit_for_word is ' + str(get_fit_for_word('her -blank- is rio and she dances on the sand', 'name', lm))
+
 if  __name__ =='__main__':
     main()
