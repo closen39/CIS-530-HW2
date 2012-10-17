@@ -7,6 +7,7 @@ from nltk.tokenize import word_tokenize
 from nltk.tokenize import sent_tokenize
 from nltk.probability import FreqDist
 from math import log, sqrt
+from subprocess import Popen, PIPE
 
 # gets all files in this directory and its sub-directories
 def get_all_files(directory):
@@ -218,7 +219,7 @@ def get_cluto_matrix(file_names):
 
     # Flatten top words into single deduped list
     flattened = [item for sublist in top_words.values() for item in sublist]
-    flattened = set(flattened)
+    flattened = list(set(flattened))
     fs = create_feature_space(flattened)
 
     # Vectorize all documents
@@ -231,10 +232,25 @@ def get_cluto_matrix(file_names):
     for id1, fname in enumerate(file_names):
         scores = list()
         for id2, fname2 in enumerate(file_names):
-            print doc_vectors[fname] is doc_vectors[fname2]
+#           print doc_vectors[fname] is doc_vectors[fname2]
             scores.append(cosine_similarity(doc_vectors[fname], doc_vectors[fname2]))
         matrix.append(scores)
     return matrix
+
+def write_cluto_matrix_file(matrix):
+    width = len(matrix[0])
+    height = len(matrix)
+    
+    flattened = [item for sublist in matrix for item in sublist]
+    nonzeroes = [item for sublist in matrix for item in sublist if item != 0]
+    print nonzeroes
+
+    out = open('graph_file', 'w')
+    out.write(str(height) + " " + str(width) + " " + str(len(nonzeroes)) + "\n")
+
+
+
+
 
 def print_sentences_from_files(file_names, outfilename):
     # list of all sentences
@@ -255,6 +271,11 @@ def print_sentences_from_files(file_names, outfilename):
     outfile = open(outfilename, "w")
     for elt in fsents:
         outfile.write(str(elt))
+
+def gen_lm_from_file(input1, output1):
+    # call ngram_count - output is written to file
+    pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram-count', '-text', input1, '-lm', output1], stdout=PIPE)
+
 
 
 # main method
@@ -296,7 +317,8 @@ def main():
 
     print get_all_bestfits('/home1/c/cis530/hw2/data/wordfit/')
 
-    get_cluto_matrix(file_names)
+    matrix = get_cluto_matrix(file_names)
+    write_cluto_matrix_file(matrix)
 
 if  __name__ =='__main__':
     main()
