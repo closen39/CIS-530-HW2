@@ -216,7 +216,7 @@ def get_cluto_matrix(file_names):
         f = open(fname)
         doc_vectors[fname] = vectorize(fs, f.read())
 
-    matrix = [][]
+    matrix = [[]]
     for id1, fname in enumerate(file_names):
         for id2, fname2 in enumerate(file_names):
             matrix[id1][id2] = cosine_similarity(doc_vectors[fname], doc_vectors[fname2])
