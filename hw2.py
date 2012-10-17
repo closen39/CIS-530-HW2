@@ -274,7 +274,7 @@ def print_sentences_from_files(file_names, outfilename):
 
 def gen_lm_from_file(input1, output1):
     # call ngram_count - output is written to file
-    pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram', '-text', input1, '-lm', output1], stdout=PIPE)
+    pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram-count', '-text', input1, '-lm', output1], stdout=PIPE)
 
 
 
