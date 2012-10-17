@@ -4,12 +4,56 @@
 # Import the corpus reader
 from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
+from nltk.probability import FreqDist
 from math import log
 
 # gets all files in this directory and its sub-directories
 def get_all_files(directory):
     files = PlaintextCorpusReader(directory, '.*')
-    return files.fileids() 
+    return files.fileids()
+
+def get_sub_directories(directory):
+    files = PlaintextCorpusReader(directory, ".*")
+    dirs = list()
+    for f in files.fileids():
+        if "/" in f:
+            if (f[:f.index("/")] not in dirs):
+                dirs.append(f[:f.index("/")])
+    return dirs
+
+# returns a list of all tokens in a file
+def load_file_tokens(filepath):
+    file1 = open(filepath)
+    text = file1.read()
+    return sent_transform(text)
+
+# load all tokens in files within this directory
+# should return list of tokens
+def load_collection_tokens(directory):
+    files = get_all_files(directory)
+    li = list()
+    for f in files:
+        tokens = load_file_tokens(directory + "/" + f)
+        li.extend(tokens)
+    return li
+
+def get_top_words_with_stoplist(path, n):
+    # read in stoplist file
+    stoplistfile = open('/home1/c/cis530/hw1/stoplist.txt')
+    stoplist = [line.strip() for line in stoplistfile]
+
+    files = get_all_files(path) # returns [] if path is a file
+    fdist = FreqDist()
+    if(len(files) == 0):
+        for word in load_file_tokens(path):
+            if(word not in stoplist):
+                fdist.inc(word)
+    else:
+        for word in load_collection_tokens(path):
+            if(word not in stoplist):
+                fdist.inc(word)  
+    li = fdist.keys()
+    return li[:n]
 
 # returns either the word itself in lowercase or 'num' if number
 # Returns numerical delimiter punctuation as a word if appears alone (ie. punctuation)
@@ -122,6 +166,20 @@ def get_all_bestfits(path):
         ret.extend(best)
     return ret
 
+def get_cluto_matrix(file_names):
+    # Get top words for each company
+    corpus = '/home1/c/cis530/hw2/data/corpus'
+    companies = get_sub_directories(corpus)
+    top_words = dict()
+    for co in companies:
+        top_words[co] = get_top_words_with_stoplist(corpus + "/" + co, 200)
+
+    for k, v in top_words.iteritems():
+        print "Company: " + str(k)
+        print "\nWords: " + str(v[:5])
+    # Get doc similarity for each file
+    pass
+
 
 # main method
 def main():
@@ -159,6 +217,8 @@ def main():
     print '\n\nbigram built - logprob of her name is ' + str(lm.logprob(('her',), 'name'))
 
     print '\n\nget_fit_for_word is ' + str(get_fit_for_word('her -blank- is rio and she dances on the sand', 'name', lm))
+
+    get_cluto_matrix('hello')
 
 if  __name__ =='__main__':
     main()
