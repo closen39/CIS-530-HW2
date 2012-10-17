@@ -24,6 +24,25 @@ def sent_transform(sent_string):
         ret.append(word_transform(token))
     return ret
 
+# creates ngram tuples of (context, word)
+def make_ngram_tuples(samples, n):
+    ret = list()
+    for idx, word in enumerate(samples):
+        if idx < n-1:
+            continue
+        if n != 1:
+            context = tuple(samples[idx-n+1:idx])
+        else:
+            context = None
+        ret.append(tuple([context, word]))
+    return ret
+
+class NGramModel:
+    def __init__(self, training_data, n):
+        self.model = make_ngram_tuples(training_data, n)
+        
+    def logprob(self, context, event):
+        pass
 
 # main method
 def main():
@@ -35,10 +54,20 @@ def main():
     print "\n\n# 1.1.2\n>>> sent_tranform('Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.')"
     print sent_transform("Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.")
 
-    print "\n\n# 1.2.1\n>>> make_ngram_tuples(samples, 1)"
-    samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'sand']    
-    #print make_ngram_tuples(samples, 1)
-    #print make_ngram_tuples(samples, 2)
+    samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'sand']
+    print "\n\n#1.3\n>>>make_ngram_tuples"
+    print "Samples = "
+    print samples
+    print "\n"
+    print make_ngram_tuples(samples, 1)
+    print "\n"
+    print make_ngram_tuples(samples, 2)
+    print "\n"
+    print make_ngram_tuples(samples, 3)
+    print "\n\n"
+
+    model = NGramModel(samples, 2)
+    print model.model
 
 if  __name__ =='__main__':
     main()
