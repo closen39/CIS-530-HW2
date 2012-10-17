@@ -262,7 +262,8 @@ def print_sentences_from_files(file_names, outfilename):
 
     # open file for writing
     outfile = open(outfilename, "w")
-    outfile.write(fsents)
+    for elt in fsents:
+        outfile.write(str(elt))
 
 
 # main method
