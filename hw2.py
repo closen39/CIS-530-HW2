@@ -240,18 +240,16 @@ def get_cluto_matrix(file_names):
 def write_cluto_matrix_file(matrix):
     width = len(matrix[0])
     height = len(matrix)
-    
-    flattened = [item for sublist in matrix for item in sublist]
     nonzeroes = [item for sublist in matrix for item in sublist if item != 0]
-    print nonzeroes
 
     out = open('graph_file', 'w')
     out.write(str(height) + " " + str(width) + " " + str(len(nonzeroes)) + "\n")
+    out.flush()
 
 
 
 
-
+# section 3
 def print_sentences_from_files(file_names, outfilename):
     # list of all sentences
     sents = list()
@@ -276,6 +274,13 @@ def gen_lm_from_file(input1, output1):
     # call ngram_count - output is written to file
     pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram-count', '-text', input1, '-lm', output1], stdout=PIPE)
 
+def gen_lm_ranking(lm_file_list, test_text_file):
+    #list of tuples to return
+    ret = list()
+    for lm in lm_file_list:
+        pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram', '-lm', lm, '-ppl', test_text_file], stdout=PIPE)
+        ret.append(tuple(str(lm), str(pipe.communicate()[0])))
+    return ret
 
 
 # main method
