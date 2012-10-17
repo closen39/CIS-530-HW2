@@ -231,7 +231,7 @@ def get_cluto_matrix(file_names):
     for id1, fname in enumerate(file_names):
         scores = list()
         for id2, fname2 in enumerate(file_names):
-            print doc_vectors[fname] is doc_vectors[fname2]
+#           print doc_vectors[fname] is doc_vectors[fname2]
             scores.append(cosine_similarity(doc_vectors[fname], doc_vectors[fname2]))
         matrix.append(scores)
     return matrix
@@ -241,11 +241,14 @@ def write_cluto_matrix_file(matrix):
     height = len(matrix)
     
     flattened = [item for sublist in matrix for item in sublist]
-    nonzeroes = [item for item in flattened if item != 0]
+    nonzeroes = [item for sublist in matrix for item in sublist if item != 0]
     print nonzeroes
 
     out = open('graph_file', 'w')
-    out.write(height + " " + width + " ")
+    out.write(str(height) + " " + str(width) + " " + len(nonzeroes) + "\n")
+
+
+
 
 
 def print_sentences_from_files(file_names, outfilename):
