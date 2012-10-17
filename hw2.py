@@ -4,6 +4,7 @@
 # Import the corpus reader
 from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
+from nltk.tokenize import sent_tokenize
 from nltk.probability import FreqDist
 from math import log
 
@@ -20,6 +21,13 @@ def get_sub_directories(directory):
             if (f[:f.index("/")] not in dirs):
                 dirs.append(f[:f.index("/")])
     return dirs
+
+  # returns a list of all sentences in that file
+def load_file_sentences(filepath):
+    file1 = open(filepath)
+    sent = file1.read()
+    sent = sent.lower()
+    return sent_tokenize(sent)  
 
 # returns a list of all tokens in a file
 def load_file_tokens(filepath):
@@ -223,6 +231,28 @@ def get_cluto_matrix(file_names):
 
     # Get doc similarity for each file
     pass
+
+
+
+
+def print_sentences_from_files(file_names, outfilename):
+    # list of all sentences
+    sents = list()
+    # get sentence transform of all files
+    for f in file_names:
+        sents.extend(load_file_sentences(f))
+
+    #list of formatted sents
+    fsents = list()
+    for sent in sents:
+        string = ''
+        for word in sent_transform(sent):
+            string.append(word + ' ')
+        fsents.append(string + '\n')
+
+    # open file for writing
+    outfile = open(outfilename, "w")
+    f.write(fsents)
 
 
 # main method
