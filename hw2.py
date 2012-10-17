@@ -279,7 +279,8 @@ def gen_lm_ranking(lm_file_list, test_text_file):
     ret = list()
     for lm in lm_file_list:
         pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram', '-lm', lm, '-ppl', test_text_file], stdout=PIPE)
-        ret.append(tuple(str(lm), str(pipe.communicate()[0])))
+        tup = str(lm), str(pipe.communicate()[0])
+        ret.append(tup)
     return ret
 
 
