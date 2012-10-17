@@ -4,6 +4,7 @@
 
 # Import the corpus reader
 from nltk.tokenize import word_tokenize
+from math import log
 
 
 # returns either the word itself in lowercase or 'num' if number
@@ -43,9 +44,15 @@ class NGramModel:
     def __init__(self, training_data, n):
         self.words = training_data
         self.model = make_ngram_tuples(training_data, n)
-        
+        self.vocab = list(set(self.words))
+
     def logprob(self, context, event):
-        pass
+        count = self.count_ngram(context, event)
+        word_count = self.count_word(event)
+        prob = (count + 1) / float((word_count + len(self.vocab)))
+        print "prob is " + str(prob)
+        print "log prob is " + str(log(prob))
+        return -1 * log(prob)
 
     def count_word(self, event):
         events = [word for (context, word) in self.model if word is event]
@@ -65,7 +72,7 @@ def main():
     print "\n\n# 1.2\n>>> sent_tranform('Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.')"
     print sent_transform("Mr. Louis's company (stock) raised to $15 per-share, growing 15.5% at 12:30pm.")
 
-    samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'her', 'name', 'is', 'jane', 'sand']
+    samples = ['her', 'name', 'is', 'rio', 'and', 'she', 'dances', 'on', 'the', 'sand']
     print "\n\n#1.3\n>>>make_ngram_tuples"
     print "Samples = "
     print samples
@@ -84,6 +91,7 @@ def main():
     print '\n\ncount of "her name" is ' + str(model.count_ngram(('her',), 'name'))
     print '\n\ncount of "is rio" is ' + str(model.count_ngram(('is',), 'rio'))
 
+    print '\n\nlogprob(("her",), name) is ' + str(model.logprob(('her',), 'name'))
 
 if  __name__ =='__main__':
     main()
