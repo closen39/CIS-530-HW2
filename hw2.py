@@ -244,8 +244,13 @@ def write_cluto_matrix_file(matrix):
 
     out = open('graph_file', 'w')
     out.write(str(height) + " " + str(width) + " " + str(len(nonzeroes)) + "\n")
-    out.flush()
 
+    for cos_vec in matrix:
+        # behavior in case of no cosine similarity is underspecified
+        # We will append an empty newline to the cluto graph file for this case
+        for idx,score in enumerate(cos_vec):
+            if score != 0:
+                out.write(str(idx+1) + " " + str(score))
 
 
 
@@ -279,7 +284,8 @@ def gen_lm_ranking(lm_file_list, test_text_file):
     ret = list()
     for lm in lm_file_list:
         pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram', '-lm', lm, '-ppl', test_text_file], stdout=PIPE)
-        ret.append(tuple(str(lm), str(pipe.communicate()[0])))
+        tup = str(lm), str(pipe.communicate()[0])
+        ret.append(tup)
     return ret
 
 
