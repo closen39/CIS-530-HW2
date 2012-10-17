@@ -74,6 +74,18 @@ def vectorize(feature_space, string):
             li[feature_space[word]] = 1
     return li
 
+def cosine_similarity(x, y):
+    prodCross = 0.0
+    xSquare = 0.0
+    ySquare = 0.0
+    for i in range(min(len(x), len(y))):
+        prodCross += x[i] * y[i]
+        xSquare += x[i] * x[i]
+        ySquare += y[i] * y[i]
+    if (xSquare == 0 or ySquare == 0):
+        return 0.0
+    return prodCross / (sqrt(xSquare) * sqrt(ySquare))
+
 # returns either the word itself in lowercase or 'num' if number
 # Returns numerical delimiter punctuation as a word if appears alone (ie. punctuation)
 # Checks all chars of the word to be number, comma, or period
@@ -203,6 +215,9 @@ def get_cluto_matrix(file_names):
     for fname in file_names:
         f = open(fname)
         doc_vectors[fname] = vectorize(fs, f.read())
+
+    arr = [cosine_similarity(x,y) for (x,y) in (doc_vectors[fname], doc_vectors[fname2]) for fname, fname2 in file_names ]
+
 
 
     # for k, v in top_words.iteritems():
