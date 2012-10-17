@@ -108,6 +108,7 @@ def get_all_bestfits(path):
     ret = list()
     for f in files:
         probs = dict()
+        f = open(f)
         sent = f.readline().rstrip()
         w1 = f.readline().rstrip()
         w2 = f.readline().rstrip()
