@@ -246,7 +246,7 @@ def write_cluto_matrix_file(matrix):
     print nonzeroes
 
     out = open('graph_file', 'w')
-    out.write(str(height) + " " + str(width) + " " + len(nonzeroes) + "\n")
+    out.write(str(height) + " " + str(width) + " " + str(len(nonzeroes)) + "\n")
 
 
 
