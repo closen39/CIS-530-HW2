@@ -105,16 +105,22 @@ def get_fit_for_word(sent, word, model):
 def get_all_bestfits(path):
     files = get_all_files(path)
     model = build_bigram_from_files(files)
+    ret = list()
     for f in files:
+        probs = dict()
         sent = f.readline().rstrip()
         w1 = f.readline().rstrip()
         w2 = f.readline().rstrip()
         w3 = f.readline().rstrip()
         w4 = f.readline().rstrip()
-        get_fit_for_word(sent, w1, model)
-        get_fit_for_word(sent, w2, model)
-        get_fit_for_word(sent, w3, model)
-        get_fit_for_word(sent, w4, model)
+        probs[w1] = get_fit_for_word(sent, w1, model)
+        probs[w2] = get_fit_for_word(sent, w2, model)
+        probs[w3] = get_fit_for_word(sent, w3, model)
+        probs[w4] = get_fit_for_word(sent, w4, model)
+        best = [k for k,v in probs.iteritems() if v is max(probs.values())]
+        ret.extend(best)
+    return ret
+
 
 # main method
 def main():
@@ -152,5 +158,6 @@ def main():
     print '\n\nbigram built - logprob of her name is ' + str(lm.logprob(('her',), 'name'))
 
     print '\n\nget_fit_for_word is ' + str(get_fit_for_word('her -blank- is rio and she dances on the sand', 'name', lm))
+
 if  __name__ =='__main__':
     main()
