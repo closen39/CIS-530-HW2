@@ -216,9 +216,6 @@ def get_cluto_matrix(file_names):
         f = open(fname)
         doc_vectors[fname] = vectorize(fs, f.read())
 
-    arr = [cosine_similarity(x,y) for (x,y) in (doc_vectors[fname], doc_vectors[fname2]) for fname, fname2 in file_names ]
-
-
 
     # for k, v in top_words.iteritems():
     #     print "Company: " + str(k)
