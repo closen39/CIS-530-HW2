@@ -65,8 +65,8 @@ def create_feature_space(inputlist):
     return dict1
 
 def vectorize(feature_space, string):
-    tokens = word_tokenize(string)
-    li = list()      
+    tokens = sent_transform(string)
+    li = list()
     for i in range(len(feature_space)):
         li.append(0)
     for word in tokens:
@@ -196,8 +196,15 @@ def get_cluto_matrix(file_names):
     # Flatten top words into single deduped list
     flattened = [item for sublist in top_words.values() for item in sublist]
     flattened = set(flattened)
-    print flattened
     fs = create_feature_space(flattened)
+
+    # Vectorize all documents
+    doc_vectors = dict()
+    for fname in file_names:
+        f = open(fname)
+        doc_vectors[fname] = vectorize(fs, f.read)
+        print doc_vectors[fname]
+
 
     # for k, v in top_words.iteritems():
     #     print "Company: " + str(k)
