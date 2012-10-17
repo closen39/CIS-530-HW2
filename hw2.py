@@ -179,7 +179,8 @@ def get_fit_for_word(sent, word, model):
 
 def get_all_bestfits(path):
     corpus = '/home1/c/cis530/hw2/data/corpus'
-    model = build_bigram_from_files([path + f for f in get_all_files(corpus)])
+    data = [corpus + "/" + f for f in get_all_files(corpus)]
+    model = build_bigram_from_files(data)
     files = get_all_files(path)
     ret = list()
     for f in files:
