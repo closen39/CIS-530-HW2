@@ -55,6 +55,25 @@ def get_top_words_with_stoplist(path, n):
     li = fdist.keys()
     return li[:n]
 
+def create_feature_space(inputlist):
+    dict1 = {}
+    index = 0
+    for word in inputlist:
+        if word not in dict1:
+            dict1[word] = index
+            index += 1
+    return dict1
+
+def vectorize(feature_space, string):
+    tokens = word_tokenize(string)
+    li = list()      
+    for i in range(len(feature_space)):
+        li.append(0)
+    for word in tokens:
+        if word in feature_space:
+            li[feature_space[word]] = 1
+    return li
+
 # returns either the word itself in lowercase or 'num' if number
 # Returns numerical delimiter punctuation as a word if appears alone (ie. punctuation)
 # Checks all chars of the word to be number, comma, or period
@@ -174,9 +193,16 @@ def get_cluto_matrix(file_names):
     for co in companies:
         top_words[co] = get_top_words_with_stoplist(corpus + "/" + co, 200)
 
-    for k, v in top_words.iteritems():
-        print "Company: " + str(k)
-        print "\nWords: " + str(v[:5])
+    # Flatten top words into single deduped list
+    flattened = [item for sublist in dict.values() for item in sublist]
+    flattened = set(flattened)
+    print flattened
+    fs = create_feature_space(flattened)
+
+    # for k, v in top_words.iteritems():
+    #     print "Company: " + str(k)
+    #     print "\nWords: " + str(v[:5])
+
     # Get doc similarity for each file
     pass
 
@@ -212,13 +238,13 @@ def main():
 
     print '\n\nlogprob(("her",), name) is ' + str(model.logprob(('her',), 'name'))
 
-    file_names = ['file.txt']
+    file_names = ['file.txt', 'file2.txt']
     lm = build_bigram_from_files(file_names)
     print '\n\nbigram built - logprob of her name is ' + str(lm.logprob(('her',), 'name'))
 
     print '\n\nget_fit_for_word is ' + str(get_fit_for_word('her -blank- is rio and she dances on the sand', 'name', lm))
 
-    get_cluto_matrix('hello')
+    get_cluto_matrix(file_names)
 
 if  __name__ =='__main__':
     main()
