@@ -194,7 +194,7 @@ def get_cluto_matrix(file_names):
         top_words[co] = get_top_words_with_stoplist(corpus + "/" + co, 200)
 
     # Flatten top words into single deduped list
-    flattened = [item for sublist in dict.values() for item in sublist]
+    flattened = [item for sublist in top_words.values() for item in sublist]
     flattened = set(flattened)
     print flattened
     fs = create_feature_space(flattened)
