@@ -202,7 +202,7 @@ def get_cluto_matrix(file_names):
     doc_vectors = dict()
     for fname in file_names:
         f = open(fname)
-        doc_vectors[fname] = vectorize(fs, f.read)
+        doc_vectors[fname] = vectorize(fs, f.read())
         print doc_vectors[fname]
 
 
