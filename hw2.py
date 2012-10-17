@@ -5,7 +5,7 @@
 from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
-from math import log
+from math import log, sqrt
 
 # gets all files in this directory and its sub-directories
 def get_all_files(directory):
@@ -222,7 +222,7 @@ def get_cluto_matrix(file_names):
         for id2, fname2 in enumerate(file_names):
             scores.append(cosine_similarity(doc_vectors[fname], doc_vectors[fname2]))
         matrix.append(scores)
-        
+
     print matrix
     # for k, v in top_words.iteritems():
     #     print "Company: " + str(k)
