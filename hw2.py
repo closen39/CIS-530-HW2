@@ -228,6 +228,8 @@ def get_cluto_matrix(file_names):
     for id1, fname in enumerate(file_names):
         scores = list()
         for id2, fname2 in enumerate(file_names):
+            print 'vector 1 : ' + str(doc_vectors[fname])
+            print 'vector 2 : ' + str(doc_vectors[fname2])
             scores.append(cosine_similarity(doc_vectors[fname], doc_vectors[fname2]))
         matrix.append(scores)
 
