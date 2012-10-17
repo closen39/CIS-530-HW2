@@ -152,7 +152,7 @@ def build_bigram_from_files(file_names):
         f = open(file1)
         for line in f:
             docs.append(line.rstrip())
-            
+
     # sentence tokenize all first lines
     samples = list()
     for doc in docs:
@@ -216,7 +216,12 @@ def get_cluto_matrix(file_names):
         f = open(fname)
         doc_vectors[fname] = vectorize(fs, f.read())
 
+    matrix = [][]
+    for id1, fname in enumerate(file_names):
+        for id2, fname2 in enumerate(file_names):
+            matrix[id1][id2] = cosine_similarity(doc_vectors[fname], doc_vectors[fname2])
 
+    print matrix
     # for k, v in top_words.iteritems():
     #     print "Company: " + str(k)
     #     print "\nWords: " + str(v[:5])
