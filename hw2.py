@@ -314,9 +314,9 @@ def gen_lm_ranking(lm_file_list, test_text_file):
         for idx, val in enumerate(output):
             if val == 'ppl=':
                 ppl = output[idx + 1]
-        tup = str(lm), str(ppl)
+        tup = str(lm), float(ppl)
         ret.append(tup)
-    return ret
+    return sorted(ret, key=lambda x: x[1])
 
 
 
