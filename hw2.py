@@ -258,7 +258,7 @@ def write_cluto_matrix_file(matrix):
         out.write("\n")
 
 def find_doc_cluster(cluster_file, label_arr, file_name):
-
+    pass
 
 # section 3
 def print_sentences_from_files(file_names, outfilename):
