@@ -273,7 +273,8 @@ def rebuild_clusters(cluster_file, label_arr, excl_file=None):
     f = open(cluster_file)
     for fname in label_arr:
         index = int(f.readline().rstrip())
-        clusters[index].append(fname)
+        if fname != excl_file:
+            clusters[index].append(fname)
     return clusters
 
 # section 3
