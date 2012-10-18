@@ -273,7 +273,8 @@ def rebuild_clusters(cluster_file, label_arr, excl_file=None):
     f = open(cluster_file)
     for fname in label_arr:
         index = int(f.readline().rstrip())
-        clusters[index].append(fname)
+        if fname != excl_file:
+            clusters[index].append(fname)
     return clusters
 
 # section 3
@@ -302,6 +303,10 @@ def gen_lm_from_file(input1, output1):
     # call ngram_count - output is written to file
     pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram-count', '-text', input1, '-lm', output1], stdout=PIPE)
 
+
+# to generate output files:
+# gen_lm_ranking(['cluster_output', 'exclclus_output', 'test_output'], 'test_text')
+# output: [('test_output', 5.98373), ('cluster_output', 14.2325), ('exclclus_output', 60.3146)]
 def gen_lm_ranking(lm_file_list, test_text_file):
     #list of tuples to return
     ret = list()
@@ -314,9 +319,9 @@ def gen_lm_ranking(lm_file_list, test_text_file):
             if val == 'ppl=':
                 ppl = output[idx + 1]
         tup = str(lm), float(ppl)
-        ret.append(tup) 
-    return ret.sort(key=lambda x: x[1])
 
+        ret.append(tup)
+    return sorted(ret, key=lambda x: x[1])
 
 
 # main method
@@ -375,13 +380,13 @@ def main():
 
     # get cluster_text
     clust = find_doc_cluster('cluto.rs', files, test + '/118742636.txt')
-    clusters = rebuild_clusters('cluto.rs', files)
+    clusters = rebuild_clusters('cluto.rs', files, test + "/118742636.txt")
     nontest_files = list()
     for c in clusters.keys():
         if c != clust:
             nontest_files.extend(clusters[c])
-    # print_sentences_from_files(clusters[clust], 'cluster_text')
-    print_sentences_from_files(nontest_files, 'exclclus_text')
+    print_sentences_from_files(clusters[clust], 'cluster_text')
+    #print_sentences_from_files(nontest_files, 'exclclus_text')
 
 if  __name__ =='__main__':
     main()

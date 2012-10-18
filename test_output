@@ -1,0 +1,304 @@
+
+\data\
+ngram 1=91
+ngram 2=164
+ngram 3=36
+
+\1-grams:
+-1.278754	$	-1.124122
+-1.725912	%	-0.2821612
+-2.123852	's	-0.08976696
+-1.521792	,	-0.1363779
+-1.470639	.	-0.9833583
+-1.94776	;	-0.09308222
+-1.424882	</s>
+-99	<s>	-0.102955
+-1.470639	a	-0.939154
+-1.64673	against	-0.8216169
+-1.64673	ago	-0.8301495
+-1.94776	and	-0.06932581
+-2.424882	approximately	-0.04603848
+-2.424882	attributable	-0.08642624
+-2.424882	average	-0.09637235
+-2.424882	before	-0.09308222
+-2.424882	business	-0.08809982
+-2.424882	cash	-0.09637235
+-1.94776	company	-0.08809981
+-2.424882	comparable	-0.0947304
+-2.424882	compared	-0.08642624
+-2.424882	comprised	-0.08976698
+-2.123852	consolidated	-0.1792138
+-2.123852	corporation	-0.09473038
+-2.424882	declares	-0.09637235
+-2.424882	deliver	-0.04603848
+-1.94776	diluted	-0.1489678
+-2.424882	dividend	-0.09637235
+-2.424882	due	-0.08642624
+-1.725912	earnings	-0.1217015
+-2.123852	ended	-0.1841772
+-2.123852	eps	-0.09142775
+-2.424882	february	-0.04603848
+-2.123852	first	-0.1808746
+-1.94776	fiscal	-0.4770097
+-1.822822	for	-0.05519545
+-2.424882	fourth	-0.09142777
+-2.424882	full	-0.08474618
+-2.123852	global	-0.09473038
+-2.424882	globally	-0.08305959
+-2.424882	growth	-0.09637235
+-2.424882	guidanc	-0.08136643
+-2.424882	guidance	-0.09142777
+-2.424882	has	-0.09637235
+-1.64673	in	-0.06229253
+-1.94776	income	-0.1489678
+-1.822822	increase	-0.05854909
+-2.123852	january	-0.1354853
+-2.424882	last	-0.08474618
+-1.424882	million	-0.06110799
+-2.424882	momentum	-0.08809982
+-1.822822	net	-0.08474617
+-2.424882	new	-0.0947304
+-2.123852	non-gaap	-0.08976696
+-0.9477604	num	-0.4243695
+-2.424882	number	-0.08976698
+-1.725912	of	-0.08512608
+-2.424882	on	-0.09637235
+-2.424882	open	-0.09637235
+-2.123852	operating	-0.182529
+-2.123852	or	-0.1639738
+-2.424882	payable	-0.09637235
+-2.123852	per	-0.1841772
+-2.424882	plans	-0.08642624
+-2.424882	positions	-0.08642624
+-2.424882	primarily	-0.09637235
+-2.424882	provides	-0.08976698
+-1.822822	quarter	-0.1152249
+-2.424882	reaffirm	-0.04603848
+-2.424882	reported	-0.0947304
+-2.424882	reports	-0.0947304
+-1.94776	results	-0.1355002
+-2.424882	revenue	-0.08976698
+-2.424882	revenues	-0.09308222
+-2.424882	sales	-0.08474618
+-2.424882	second	-0.08474618
+-2.123852	share	-0.07280018
+-2.123852	starbucks	-0.1841772
+-2.123852	stores	-0.09473038
+-2.424882	strong	-0.09637235
+-2.424882	taxes	-0.09308222
+-1.521792	the	-0.09176097
+-2.424882	third	-0.08474618
+-2.424882	ticket	-0.08305959
+-1.579784	to	-0.01554915
+-2.424882	total	-0.09142777
+-2.424882	transactions	-0.09308222
+-2.123852	unaudited	-0.1841772
+-1.94776	was	-0.5054983
+-1.94776	were	-0.1303402
+-1.521792	year	-0.678307
+
+\2-grams:
+-0.02996322	$ num	-0.4012161
+-1.393575	% eps
+-0.3741622	% increase	-0.5336027
+-1.393575	% to
+-0.9956352	's global
+-0.9956352	's results
+-1.597695	, and
+-1.597695	, comprised
+-1.597695	, fourth
+-0.5782821	, num	-0.03456607
+-1.597695	, the
+-1.597695	, third
+-0.04575749	. </s>
+-1.171726	; declares
+-1.171726	; plans
+-1.171726	; provides
+-1.694605	<s> earnings
+-1.694605	<s> for
+-1.694605	<s> net
+-1.154219	<s> non-gaap
+-1.694605	<s> operating
+-1.154219	<s> starbucks	0.08381247
+-1.154219	<s> the
+-0.6294346	a num	-0.5228788
+-0.1760913	a year	-0.243038
+-0.06694679	against $	0.3309933
+-0.06694679	ago .	0.154902
+-1.171726	and a
+-1.171726	and full
+-1.171726	and to
+-0.6946052	approximately num
+-0.6946052	attributable to
+-0.6946052	average ticket
+-0.6946052	before income
+-0.6946052	business in
+-0.6946052	cash dividend
+-1.171726	company 's
+-1.171726	company has
+-1.171726	company were
+-0.6946052	comparable stores
+-0.6946052	compared to
+-0.6946052	comprised of
+-0.4552488	consolidated earnings	-0.0380296
+-0.9956352	corporation reported
+-0.9956352	corporation reports
+-0.6946052	declares cash
+-0.6946052	deliver num
+-1.171726	diluted eps
+-0.6313401	diluted per	0.08381247
+-0.6946052	dividend payable
+-0.6946052	due to
+-1.393575	earnings attributable
+-1.393575	earnings before
+-1.393575	earnings guidance
+-0.8531889	earnings results	0.01195908
+-0.4552488	ended january	0.08381247
+-0.9956352	eps growth
+-0.9956352	eps was
+-0.6946052	february num
+-0.4552488	first quarter	-0.01995136
+-0.1523134	fiscal num
+-0.8361432	for the	-0.008904118
+-0.6946052	fourth quarter
+-0.6946052	full year
+-0.9956352	global business
+-0.9956352	global comparable
+-0.6946052	globally .
+-0.6946052	growth compared
+-0.6946052	guidanc </s>
+-0.6946052	guidance for
+-0.6946052	has total
+-1.472757	in average
+-1.472757	in company
+-1.472757	in fiscal
+-1.472757	in global
+-1.472757	in net
+-1.472757	in the
+-1.171726	income taxes
+-0.6313401	income was	0.4253369
+-0.8361432	increase in
+-0.4552488	january num	-0.07192995
+-0.6946052	last year
+-1.234083	million a	-0.2218488
+-1.234083	million against	0.146128
+-1.154219	million or	0.08381247
+-0.6946052	momentum in
+-1.296665	net earnings
+-1.296665	net new
+-1.296665	net revenue
+-1.296665	net revenues
+-0.6946052	new stores
+-0.9956352	non-gaap diluted
+-0.9956352	non-gaap operating
+-0.7781513	num %	-0.1594839
+-1.152313	num ,	-0.468897
+-2.171726	num .
+-1.152313	num ;
+-2.171726	num a
+-2.171726	num against
+-2.171726	num and
+-1.63134	num diluted	0.01195908
+-2.171726	num guidanc
+-0.4771213	num million	-0.7128222
+-2.171726	num net
+-2.171726	num positions
+-0.6946052	number of
+-1.393575	of $
+-1.393575	of a
+-0.8531889	of fiscal	0.4253369
+-1.393575	of transactions
+-0.6946052	on february
+-0.6946052	open approximately
+-0.4552488	operating income	0.01195908
+-0.4552488	or $	1.072449
+-0.6946052	payable on
+-0.4552488	per share
+-0.6946052	plans to
+-0.6946052	positions to
+-0.6946052	primarily due
+-0.6946052	provides earnings
+-1.296665	quarter ,
+-0.7562788	quarter ended	0.08381247
+-1.296665	quarter of
+-0.6946052	reaffirm num
+-0.6946052	reported unaudited
+-0.6946052	reports unaudited
+-1.171726	results ,
+-0.6313401	results for	-0.03518508
+-0.6946052	revenue of
+-0.6946052	revenues were
+-0.6946052	sales ,
+-0.6946052	second ,
+-0.9956352	share a
+-0.9956352	share against
+-0.4552488	starbucks corporation
+-0.9956352	stores globally
+-0.9956352	stores sales
+-0.6946052	strong momentum
+-0.6946052	taxes were
+-1.597695	the company
+-1.057309	the first	0.08381247
+-1.597695	the increase
+-1.597695	the number
+-1.597695	the quarter
+-1.597695	the second
+-1.597695	the strong
+-0.6946052	third ,
+-0.6946052	ticket .
+-1.539703	to a
+-1.539703	to company
+-1.539703	to deliver
+-1.539703	to last
+-1.539703	to num
+-1.539703	to open
+-1.539703	to reaffirm
+-0.6946052	total net
+-0.6946052	transactions and
+-0.4552488	unaudited consolidated	0.08381247
+-0.1523134	was $	0.5740313
+-0.6313401	were $	1.072449
+-1.171726	were primarily
+-1.597695	year 's
+-0.1249387	year ago	0
+-1.597695	year of
+
+\3-grams:
+-0.06694679	against $ num
+-0.6730378	or $ num
+-0.1249387	was $ num
+-0.6730378	were $ num
+-0.2218488	num % increase
+-0.1249387	num , num
+-0.06694679	ago . </s>
+-0.09691001	million a year
+-0.09691001	million against $
+-0.06694679	year ago .
+-0.6730378	unaudited consolidated earnings
+-0.6730378	num diluted per
+-0.6730378	consolidated earnings results
+-0.6730378	quarter ended january
+-0.6730378	the first quarter
+-0.6730378	of fiscal num
+-0.6730378	results for the
+-0.6730378	operating income was
+-0.1249387	% increase in
+-0.6730378	ended january num
+-0.39794	num million a
+-0.39794	num million against
+-1.372008	num million or
+-1.518136	$ num diluted
+-0.146128	$ num million
+-0.849129	, num ;
+-0.1249387	a num %
+-0.6730378	january num ,
+-0.6730378	million or $
+-0.6730378	diluted per share
+-0.6730378	first quarter ended
+-0.6730378	earnings results for
+-0.6730378	<s> starbucks corporation
+-0.9740677	for the first
+-0.6730378	income was $
+-0.06694679	a year ago
+
+\end\
