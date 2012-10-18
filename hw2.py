@@ -259,7 +259,7 @@ def write_cluto_matrix_file():
         out.write("\n")
 
 def find_doc_cluster(cluster_file, label_arr, file_name):
-    index = [idx for idx, fname in enumerate(label_arr) if file_name == fname][0]
+    index = idx for idx, fname in enumerate(label_arr) if file_name == fname
     f = open(cluster_file)
     # burn index-1 lines
     for x in range(index):
@@ -356,7 +356,7 @@ def main():
     test = '/home1/c/cis530/hw2/data/test'
     files.extend([test + "/" + x for x in get_all_files(test)])
 
-    find_doc_cluster('cluto.rs', files, 'testfile.txt')
+    print find_doc_cluster('cluto.rs', files, 'testfile.txt')
 
 
 if  __name__ =='__main__':
