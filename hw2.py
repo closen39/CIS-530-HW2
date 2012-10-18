@@ -258,7 +258,7 @@ def write_cluto_matrix_file(matrix):
         # We will append an empty newline to the cluto graph file for this case
         for idx,score in enumerate(cos_vec):
             if score != 0:
-                out.write(str(idx+1) + " " + str(score))
+                out.write(str(idx+1) + " " + str(score) + " ")
         out.write("\n")
 
 
