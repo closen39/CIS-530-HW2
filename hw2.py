@@ -376,7 +376,12 @@ def main():
     # get cluster_text
     clust = find_doc_cluster('cluto.rs', files, test + '/118742636.txt')
     clusters = rebuild_clusters('cluto.rs', files)
-    print_sentences_from_files(clusters[clust], 'cluster_text')
+    nontest_files = list()
+    for c in clusters.keys():
+        if c != clust:
+            nontest_files.extend(clusters[c])
+    # print_sentences_from_files(clusters[clust], 'cluster_text')
+    print_sentences_from_files(nontest_files, 'exclclus_text')
 
 if  __name__ =='__main__':
     main()
