@@ -259,7 +259,12 @@ def write_cluto_matrix_file():
         out.write("\n")
 
 def find_doc_cluster(cluster_file, label_arr, file_name):
-    index = idx for idx, fname in enumerate(label_arr) if file_name == fname
+    index = -1
+    for idx, fname in enumerate(label_arr):
+        if file_name == fname:
+            index = idx
+    if index == -1:
+        return None
     f = open(cluster_file)
     # burn index-1 lines
     for x in range(index):
