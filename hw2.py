@@ -248,19 +248,16 @@ def write_cluto_matrix_file(matrix):
     
     width = len(matrix[0])
     height = len(matrix)
-    nonzeroes = [item for sublist in matrix for item in sublist if item != 0]
 
     out = open('graph_file', 'w')
-    out.write(str(height) + " " + str(width) + " " + str(len(nonzeroes)) + "\n")
+    out.write(str(height) + " " + str(width) + "\n")
 
     for cos_vec in matrix:
-        # behavior in case of no cosine similarity is underspecified
-        # We will append an empty newline to the cluto graph file for this case
-        for idx,score in enumerate(cos_vec):
-            if score != 0:
-                out.write(str(idx+1) + " " + str(score) + " ")
+        for idx, score in enumerate(cos_vec):
+            out.write(str(idx+1) + " " + str(score) + " ")
         out.write("\n")
 
+def find_doc_cluster(cluster_file, label_arr, file_name):
 
 
 # section 3
