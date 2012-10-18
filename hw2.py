@@ -237,7 +237,7 @@ def get_cluto_matrix(file_names):
         matrix.append(scores)
     return matrix
 
-def write_cluto_matrix_file(matrix):
+def write_cluto_matrix_file():
     files = list()
     corpus = '/home1/c/cis530/hw2/data/corpus'
     files.extend([corpus + "/" + x for x in get_all_files(corpus)])
@@ -341,7 +341,7 @@ def main():
     print get_all_bestfits('/home1/c/cis530/hw2/data/wordfit/')
 
     matrix = get_cluto_matrix(file_names)
-    write_cluto_matrix_file(matrix)
+    write_cluto_matrix_file()
 
 if  __name__ =='__main__':
     main()
