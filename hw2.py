@@ -277,7 +277,16 @@ def rebuild_clusters(cluster_file, label_arr, excl_file=None):
             clusters[index].append(fname)
     return clusters
 
-# section 3
+# Section 3
+
+"""
+3.2.2: Which language model do we find is better in classifying the test file?
+We found that the language model trained only on the test file itself produced
+the lowest measure of perplexity and was the best match. The next best language 
+model is the one trained using just the cluster containing the test file. Finally,
+the worst performing language model (with the highest measured perplexity) is the 
+one trained with files NOT in the cluster of the test file.
+"""
 def print_sentences_from_files(file_names, outfilename):
     # list of all sentences
     sents = list()
@@ -387,6 +396,8 @@ def main():
             nontest_files.extend(clusters[c])
     print_sentences_from_files(clusters[clust], 'cluster_text')
     #print_sentences_from_files(nontest_files, 'exclclus_text')
+
+
 
 if  __name__ =='__main__':
     main()
