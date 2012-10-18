@@ -238,6 +238,7 @@ def get_cluto_matrix(file_names):
     return matrix
 
 def write_cluto_matrix_file():
+    # files is our label_arr of filenames
     files = list()
     corpus = '/home1/c/cis530/hw2/data/corpus'
     files.extend([corpus + "/" + x for x in get_all_files(corpus)])
@@ -258,7 +259,12 @@ def write_cluto_matrix_file():
         out.write("\n")
 
 def find_doc_cluster(cluster_file, label_arr, file_name):
-    pass
+    index = [idx for idx, fname in enumerate(label_arr) if file_name == fname][0]
+    f = open(cluster_file)
+    # burn index-1 lines
+    for x in range(index):
+        f.readline()
+    return int(f.readline())
 
 # section 3
 def print_sentences_from_files(file_names, outfilename):
@@ -340,8 +346,18 @@ def main():
 
     print get_all_bestfits('/home1/c/cis530/hw2/data/wordfit/')
 
-    matrix = get_cluto_matrix(file_names)
-    write_cluto_matrix_file()
+    # matrix = get_cluto_matrix(file_names)
+    # write_cluto_matrix_file()
+
+    #files is label_arr
+    files = list()
+    corpus = '/home1/c/cis530/hw2/data/corpus'
+    files.extend([corpus + "/" + x for x in get_all_files(corpus)])
+    test = '/home1/c/cis530/hw2/data/test'
+    files.extend([test + "/" + x for x in get_all_files(test)])
+
+    find_doc_cluster('cluto.rs', files, 'testfile.txt')
+
 
 if  __name__ =='__main__':
     main()
