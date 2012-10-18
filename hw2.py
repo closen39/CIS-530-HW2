@@ -274,9 +274,7 @@ def rebuild_clusters(cluster_file, label_arr, excl_file=None):
     for fname in label_arr:
         index = int(f.readline().rstrip())
         clusters[index].append(fname)
-    return clusters    
-
-
+    return clusters
 
 # section 3
 def print_sentences_from_files(file_names, outfilename):
@@ -299,6 +297,7 @@ def print_sentences_from_files(file_names, outfilename):
     for elt in fsents:
         outfile.write(str(elt))
 
+
 def gen_lm_from_file(input1, output1):
     # call ngram_count - output is written to file
     pipe = Popen(['/home1/c/cis530/hw2/srilm/ngram-count', '-text', input1, '-lm', output1], stdout=PIPE)
@@ -317,6 +316,7 @@ def gen_lm_ranking(lm_file_list, test_text_file):
         tup = str(lm), str(ppl)
         ret.append(tup)
     return ret
+
 
 
 # main method
@@ -369,9 +369,14 @@ def main():
 
     # write_cluto_matrix_file(files)
 
-    print find_doc_cluster('cluto.rs', files, files[3])
+    #print find_doc_cluster('cluto.rs', files, files[3])
 
-    print rebuild_clusters('cluto.rs', files)
+    #print rebuild_clusters('cluto.rs', files)
+
+    # get cluster_text
+    clust = find_doc_cluster('cluto.rs', files, test + '/118742636.txt')
+    clusters = rebuild_clusters('cluto.rs', files)
+    print_sentences_from_files(clusters[clust], 'cluster_text')
 
 if  __name__ =='__main__':
     main()
