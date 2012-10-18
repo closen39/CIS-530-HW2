@@ -271,9 +271,9 @@ def rebuild_clusters(cluster_file, label_arr, excl_file=None):
         clusters[i] = list()
 
     f = open(cluster_file)
-    for idx, fname in label_arr:
+    for fname in label_arr:
         index = int(f.readline().rstrip())
-        clusters[ndex].append(fname)
+        clusters[index].append(fname)
     return clusters    
 
 
