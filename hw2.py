@@ -254,7 +254,7 @@ def write_cluto_matrix_file():
 
     for cos_vec in matrix:
         for idx, score in enumerate(cos_vec):
-            out.write(str(idx+1) + " " + str(score) + " ")
+            out.write(str(score) + " ")
         out.write("\n")
 
 def find_doc_cluster(cluster_file, label_arr, file_name):
