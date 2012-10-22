@@ -287,6 +287,14 @@ model is the one trained using just the cluster containing the test file. Finall
 the worst performing language model (with the highest measured perplexity) is the 
 one trained with files NOT in the cluster of the test file.
 """
+
+"""
+3.3.2: Which smoothing method is the best here? And which one is the worst?
+>>> gen_lm_ranking(['lm.rs', 'laplace.rs', 'neys.rs', 'neys_inter.rs'], 'test_text')
+>>> [('neys.rs', 17.4398), ('lm.rs', 17.5406), ('neys_inter.rs', 17.5406), ('laplace.rs', 346.076)]
+We found that Ney's absolute discounting method worked best, followed by the default discounting method.
+The worst language model was the Laplace smoothing method.
+"""
 def print_sentences_from_files(file_names, outfilename):
     # list of all sentences
     sents = list()
