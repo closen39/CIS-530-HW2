@@ -380,6 +380,51 @@ def get_rank_differences(ref_lm_file, lm_files, n):
 
     return (ngrams, retList)
 
+def get_fit_for_word_srilm(sent, word, lm_file):
+    words = sent_transform(sent)
+    context = str()
+    follower = str()
+    for idx, wrd in enumerate(words):
+        if wrd == '-blank-':
+            context = words[idx-1]
+        if words[idx-1] == '-blank-':
+            follower = wrd
+
+    f = open(lm_file)
+    lp1 = 0
+    lp2 = 0
+    for line in f:
+        items = line.split("\t")
+        if len(items) < 3:
+            continue
+        if items[1] == context + " " + word:
+            lp1 = float(items[0])
+        if items[1] == word + " " + follower:
+            lp2 = float(items[0])
+    return lp1 + lp2
+
+def get_all_bestfits_srilm(dir, lm_file):
+    model = lm_file
+    
+    # Get all best fit files
+    files = get_all_files(path)
+    ret = list()
+    for f in files:
+        probs = dict()
+        f = open(path + "/" + f)
+        sent = f.readline().rstrip()
+        w1 = f.readline().rstrip()
+        w2 = f.readline().rstrip()
+        w3 = f.readline().rstrip()
+        w4 = f.readline().rstrip()
+        probs[w1] = get_fit_for_word_srilm(sent, w1, model)
+        probs[w2] = get_fit_for_word_srilm(sent, w2, model)
+        probs[w3] = get_fit_for_word_srilm(sent, w3, model)
+        probs[w4] = get_fit_for_word_srilm(sent, w4, model)
+        best = [k for k,v in probs.iteritems() if v is max(probs.values())]
+        ret.extend(best)
+    return ret
+
 # main method
 def main():
     print "# 1.1.1\n>>> word_tranform('34,213.397')"
