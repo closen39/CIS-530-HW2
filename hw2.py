@@ -375,7 +375,7 @@ def get_rank_differences(ref_lm_file, lm_files, n):
 
         for idx, item in enumerate(entries):
             if item[0] in ngrams:
-                lmList[indexer[item]] = idx
+                lmList[indexer[item[0]]] = idx
         retList.append(lmList)
 
     return (ngrams, retList)
