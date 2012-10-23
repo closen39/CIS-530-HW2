@@ -401,6 +401,7 @@ def get_fit_for_word_srilm(sent, word, lm_file):
             lp1 = float(items[0])
         if items[1] == word + " " + follower:
             lp2 = float(items[0])
+    print word, lp1, lp2
     return lp1 + lp2
 
 def get_all_bestfits_srilm(path, lm_file):
