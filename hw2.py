@@ -403,7 +403,7 @@ def get_fit_for_word_srilm(sent, word, lm_file):
             lp2 = float(items[0])
     return lp1 + lp2
 
-def get_all_bestfits_srilm(dir, lm_file):
+def get_all_bestfits_srilm(path, lm_file):
     model = lm_file
     
     # Get all best fit files
