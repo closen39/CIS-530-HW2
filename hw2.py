@@ -397,9 +397,9 @@ def get_fit_for_word_srilm(sent, word, lm_file):
         items = line.split("\t")
         if len(items) < 2:
             continue
-        if items[1] == context + " " + word:
+        if items[1].rstrip() == context + " " + word:
             lp1 = float(items[0])
-        if items[1] == word + " " + follower:
+        if items[1].rstrip() == word + " " + follower:
             lp2 = float(items[0])
     print word, lp1, lp2
     return lp1 + lp2
