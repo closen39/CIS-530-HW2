@@ -391,8 +391,8 @@ def get_fit_for_word_srilm(sent, word, lm_file):
             follower = wrd
 
     f = open(lm_file)
-    lp1 = 0
-    lp2 = 0
+    lp1 = float(-inf)
+    lp2 = float(-inf)
     for line in f:
         items = line.split("\t")
         if len(items) < 3:
