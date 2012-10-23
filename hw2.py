@@ -9,6 +9,7 @@ from nltk.probability import FreqDist
 from math import log, sqrt
 from subprocess import Popen, PIPE
 
+
 # gets all files in this directory and its sub-directories
 def get_all_files(directory):
     files = PlaintextCorpusReader(directory, '.*')
@@ -340,6 +341,39 @@ def gen_lm_ranking(lm_file_list, test_text_file):
         ret.append(tup)
     return sorted(ret, key=lambda x: x[1])
 
+def get_rank_differences(ref_lm_file, lm_files, n):
+    top_ngrams = list()
+    f = open(ref_lm_file)
+    for line in f:
+        items = line.split("\t")
+        top_ngrams.append((items[1], items[0]))
+        if len(top_ngrams) > n:
+            top_ngrams = sorted(top_ngrams, key=lambda x: x[1])[:-1]
+    
+    ngrams = [x for (x,y) in top_ngrams]
+    indexer = dict()
+    for idx, ngram in enumerate(ngrams):
+        indexer[ngram] = idx
+
+    retList = list()
+    for file1 in lm_files:
+        f = open(file1)
+        entries = list()
+        for line in f:
+            items = line.split("\t")
+            entries.append((items[1], items[0]))
+        entries = sorted(entries, key=lambda x: x[1])
+
+        lmList = list()
+        for i in range(n):
+            lmList.append(0)
+
+        for idx, item in enumerate(entries):
+            if item in ngrams:
+                lmList[indexer[item]] = idx
+        retList.append(lmList)
+
+    return (ngrams, retList)
 
 # main method
 def main():
