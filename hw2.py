@@ -346,7 +346,7 @@ def get_rank_differences(ref_lm_file, lm_files, n):
     f = open(ref_lm_file)
     for line in f:
         items = line.split("\t")
-        if len(items) < 3:
+        if len(items) < 2:
             continue
         top_ngrams.append((items[1], items[0]))
         if len(top_ngrams) > n:
@@ -363,7 +363,7 @@ def get_rank_differences(ref_lm_file, lm_files, n):
         entries = list()
         for line in f:
             items = line.split("\t")
-            if len(items) < 3:
+            if len(items) < 2:
                 continue
             entries.append((items[1], items[0]))
         entries = sorted(entries, key=lambda x: x[1])
@@ -395,7 +395,7 @@ def get_fit_for_word_srilm(sent, word, lm_file):
     lp2 = float("-inf")
     for line in f:
         items = line.split("\t")
-        if len(items) < 3:
+        if len(items) < 2:
             continue
         if items[1] == context + " " + word:
             lp1 = float(items[0])
@@ -404,6 +404,11 @@ def get_fit_for_word_srilm(sent, word, lm_file):
     print word, lp1, lp2
     return lp1 + lp2
 
+"""
+3.3.3: After running get_all_bestfits_srilm on our best language model, neys.rs, we found the suggested
+fill-in-the-blanks to be the same suggestions as when previously run with our laplacian ngram model. Although
+the results did not in fact produce better suggestions in this case, 
+"""
 def get_all_bestfits_srilm(path, lm_file):
     model = lm_file
     
