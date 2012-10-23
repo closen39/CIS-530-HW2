@@ -405,9 +405,11 @@ def get_fit_for_word_srilm(sent, word, lm_file):
     return lp1 + lp2
 
 """
-3.3.3: After running get_all_bestfits_srilm on our best language model, neys.rs, we found the suggested
+3.4: After running get_all_bestfits_srilm on our best language model, neys absolute discounting, we found the suggested
 fill-in-the-blanks to be the same suggestions as when previously run with our laplacian ngram model. Although
-the results did not in fact produce better suggestions in this case, 
+the results did not in fact produce better suggestions in this case, the log-probabilities of our neys language
+model in most cases were lower than their laplacian counterparts. This supports our understanding that the
+neys language model is superior to the laplacian model.
 """
 def get_all_bestfits_srilm(path, lm_file):
     model = lm_file
