@@ -350,7 +350,7 @@ def get_rank_differences(ref_lm_file, lm_files, n):
             continue
         top_ngrams.append((items[1], items[0]))
         if len(top_ngrams) > n:
-            top_ngrams = sorted(top_ngrams, key=lambda x: x[1], reverse=True)[:-1]
+            top_ngrams = sorted(top_ngrams, key=lambda x: x[1])[:-1]
     
     ngrams = [x for (x,y) in top_ngrams]
     indexer = dict()
@@ -366,14 +366,15 @@ def get_rank_differences(ref_lm_file, lm_files, n):
             if len(items) < 3:
                 continue
             entries.append((items[1], items[0]))
-        entries = sorted(entries, key=lambda x: x[1], reverse=True)
+        entries = sorted(entries, key=lambda x: x[1])
 
         lmList = list()
         for i in range(n):
             lmList.append(0)
 
+
         for idx, item in enumerate(entries):
-            if item in ngrams:
+            if item[0] in ngrams:
                 lmList[indexer[item]] = idx
         retList.append(lmList)
 
