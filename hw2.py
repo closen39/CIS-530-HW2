@@ -346,6 +346,8 @@ def get_rank_differences(ref_lm_file, lm_files, n):
     f = open(ref_lm_file)
     for line in f:
         items = line.split("\t")
+        if len(items) < 3:
+            continue
         top_ngrams.append((items[1], items[0]))
         if len(top_ngrams) > n:
             top_ngrams = sorted(top_ngrams, key=lambda x: x[1])[:-1]
@@ -361,6 +363,8 @@ def get_rank_differences(ref_lm_file, lm_files, n):
         entries = list()
         for line in f:
             items = line.split("\t")
+            if len(items) < 3:
+                continue
             entries.append((items[1], items[0]))
         entries = sorted(entries, key=lambda x: x[1])
 
